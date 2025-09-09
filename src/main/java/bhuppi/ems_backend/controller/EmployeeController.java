@@ -1,6 +1,7 @@
 package bhuppi.ems_backend.controller;
 
 import bhuppi.ems_backend.dto.EmployeeDto;
+import bhuppi.ems_backend.entity.Employee;
 import bhuppi.ems_backend.service.EmployeeService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -36,5 +37,22 @@ public class EmployeeController {
         List<EmployeeDto> employees = employeeService.getAllEmployees();
         return ResponseEntity.ok(employees);
     }
+
+    //    update employee
+    @PutMapping("{Id}")
+    public ResponseEntity<EmployeeDto> updateEmployee(@PathVariable("Id") Long Id, @RequestBody EmployeeDto updateEmployee) {
+        EmployeeDto employeeDto = employeeService.updateEmployee(Id, updateEmployee);
+        return ResponseEntity.ok(employeeDto);
+
+    }
+
+
+    //    delete employee
+    @DeleteMapping("{Id}")
+    public ResponseEntity<String> deleteEmployee(@PathVariable("Id") Long employeeId) {
+        employeeService.deleteEmployee(employeeId);
+        return ResponseEntity.ok("Employee deleted");
+    }
+
 }
 
